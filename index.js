@@ -32,3 +32,5 @@ function operate(operator, leftVariable, rightVariable){
             return divide(leftVariable, rightVariable);
     }
 }
+
+// We'll add even listeners to the buttons so that they respond accordingly when theyre clicked

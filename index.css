@@ -70,12 +70,12 @@ button {
     margin-bottom: 30px;
 }
 
-#del {
+.del {
     background-color: rgba(144, 7, 4, .65);
     color: white;
 }
 
-#c {
+.c {
     background-color: rgba(176, 44, 29, .65);
     color: white;
 }
