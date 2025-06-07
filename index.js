@@ -50,6 +50,7 @@ document.querySelectorAll(".button").forEach( button =>
         if (button.classList.contains("number")) {
             numbers[numberIndex] += button.textContent;
             updateDisplay(numbers[0] + " " + operand + " " + numbers[1]);
+            return;
         }
 
         // For operations we'll switch out the current operation 
@@ -69,7 +70,7 @@ document.querySelectorAll(".button").forEach( button =>
 
             // Finally if both numbers have been inputted we evaluate the expression and take the result as the first number
             if (numbers[0] != "" && numbers[1] != "") {
-                let result = operate(operand, parseInt(numbers[0]), parseInt(numbers[1])).toFixed(3);
+                let result = operate(operand, parseFloat(numbers[0]), parseFloat(numbers[1])).toFixed(3);
                 numbers[0] = result;
                 numbers[1] = "";
             }
@@ -77,6 +78,7 @@ document.querySelectorAll(".button").forEach( button =>
             operand = button.textContent;
             numberIndex = 1;
             updateDisplay(numbers[0] + " " + operand + " " + numbers[1]);
+            return;
         }
 
         // For the clear button well empty out all the variables and reset the display
@@ -85,6 +87,7 @@ document.querySelectorAll(".button").forEach( button =>
             numberIndex = 0;
             operand = "";
             updateDisplay();
+            return;
         }
 
         // If the button is the equals we evaluate the expression
@@ -96,12 +99,43 @@ document.querySelectorAll(".button").forEach( button =>
             }
             let result = operate(operand, parseFloat(numbers[0]), parseFloat(numbers[1])).toFixed(3);
             updateDisplay(result);
+            return;
         }
 
         // Case for the backspace button
         if (button.classList.contains("del")) {
             // We will delete the rightmost character inputted
-            
+            if (numbers[1] != ""){
+                // We'll remove the last character from the string
+                numbers[1] = numbers[1].slice(0, -1);
+                updateDisplay(numbers[0] + " " + operand + " " + numbers[1]);
+                return;
+            }
+            if (operand != ""){
+                operand = "";
+                // In this case we'll move the index to 0 since everything else is deleted
+                numberIndex = 0;
+                updateDisplay(numbers[0] + " " + operand + " " + numbers[1]);
+                return;
+            }
+            if (numbers[0] != ""){
+                numbers[0] = numbers[0].slice(0, -1);
+                updateDisplay(numbers[0] + " " + operand + " " + numbers[1]);
+                return;
+            }
+            return;
         }
+
+        if (button.classList.contains("dot")) {
+            // A number can have on dot at most 
+            if (numbers[numberIndex].includes(".")){
+                alert("Your number already has one period, it can't have two");
+                return;
+            }
+            numbers[numberIndex] += ".";
+            updateDisplay(numbers[0] + " " + operand + " " + numbers[1]);
+            return;
+        }
+
     })
 );
