@@ -45,6 +45,7 @@ body {
     justify-content: flex-end;
     padding-right: 30px;
     border-radius: 30px;
+    overflow: hidden;
 }
 
 .buttons {
@@ -78,4 +79,13 @@ button {
 .c {
     background-color: rgba(176, 44, 29, .65);
     color: white;
+}
+
+.button > img {
+    width: 30px;
+    height: 25px;
+}
+
+.right > img {
+    rotate: 180deg;
 }
